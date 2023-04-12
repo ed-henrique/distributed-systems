@@ -13,4 +13,4 @@ if __name__ == "__main__":
             channel.basic_publish(exchange='', routing_key='my_queue', body=fn.get_cpu_temperature_as_str())
             sleep(5)
     except:
-        print('Erro ao executar o programa')
+        fn.print_with_time('Erro ao executar o programa')

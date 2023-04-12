@@ -9,6 +9,15 @@ Existem 4 programas em execução nesse sistema:
 - `fire_consumer.py`: programa que ativa o sistema de incêndio caso receba uma mensagem do consumer
 - `main_consumer.py`: programa que recebe as mensagens do fire_consumer e as imprime no terminal
 
+Logo, o sistema apresenta uma hierarquia muito clara:
+
+```mermaid
+graph LR;
+    producer --> consumer;
+    consumer --> fire_consumer;
+    fire_consumer --> main_consumer;
+```
+
 **OBS: funcionando apenas no Linux**
 
 ## Imports Necesários
@@ -21,5 +30,4 @@ Existem 4 programas em execução nesse sistema:
 ## Possíveis melhorias
 
 - Acrescentar um logger
-- Adicionar a data e horário às mensagens
 - Resolver o problema de não conseguir fechar o programa com Ctrl+C
