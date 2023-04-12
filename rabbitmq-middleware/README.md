@@ -26,6 +26,7 @@ graph LR;
 - pika
 - time
 - psutil
+- datetime
 
 ## Possíveis melhorias
 
