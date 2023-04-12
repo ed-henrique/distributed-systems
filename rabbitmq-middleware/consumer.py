@@ -4,17 +4,19 @@
 
 import fn
 
+MAX_ALLOWED_TEMPERATURE = 70.0 # Para testar, use 50.0
+
 def callback(ch, method, properties, body):
     temperature_str = body.decode('ascii')
     temperature = float(temperature_str)
 
     fn.print_with_time("Temperatura atual do cliente: ", end="")
     
-    if temperature > 50.0:
-        print('\033[0;31m' + temperature_str + '\033[0m') # Red
+    if temperature > MAX_ALLOWED_TEMPERATURE:
+        print('\033[0;31m' + temperature_str + '\033[0m') # Vermelho
         fn.report_fire(ch)
     else:
-        print('\033[0;32m' + temperature_str + '\033[0m') # Green
+        print('\033[0;32m' + temperature_str + '\033[0m') # Verde
 
 if __name__ == "__main__":
     try:
