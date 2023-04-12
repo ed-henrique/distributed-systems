@@ -1,6 +1,6 @@
 # Middleware com RabbitMQ para ativar sistema de incêndio
 
-https://raw.githubusercontent.com/ed-henrique/distributed-systems/main/rabbitmq-middleware/media/demo.mp4
+https://user-images.githubusercontent.com/62185704/231572044-d661879d-7fd2-453c-b663-1448ff7a44cb.mp4
 
 Middleware cliente-servidor, que utiliza o protocolo AMQP para troca de mensagens.
 
