@@ -15,14 +15,13 @@ Ambos operam de forma multithread e se comunicam por socket.
 
 ## Relatório
 
-### Ferramentas Utilizadas
+Usando as seguintes ferramentas:
 
+- `htop`
+- `pidstat`
 
+Foi verificado que o tamanho da mensagem não importava, e que o servidor sempre rodava com menos de 2% de uso de CPU e RAM.
 
-### Mensagem com 1 byte
+Para verificar a largura de banda, podemos usar a seguinte ferramenta:
 
-### Mensagem com 512 bytes
-
-### Mensagem com 1 KiB (1024 bytes)
-
-### Mensagem com 1 MiB (1048576 bytes)
+- `iftop`
