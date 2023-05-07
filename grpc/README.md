@@ -14,7 +14,7 @@ A aplicação deverá ser composta por um servidor e um cliente, implementados u
 
 - [x] O servidor deve ser capaz de receber comandos em formato de string do cliente e executá-los em uma máquina Linux;
 - [x] O cliente deve permitir que o usuário insira os comandos que deseja executar no servidor e exibir o resultado da execução;
-- [ ] O código deve ser modularizado e organizado em pacotes e módulos;
+- [x] O código deve ser modularizado e organizado em pacotes e módulos;
 - [x] Deve ser possível executar o servidor e o cliente em máquinas diferentes;
 - [x] O servidor e o cliente devem ser implementados usando gRPC e Python.
 
@@ -24,7 +24,7 @@ A aplicação deverá ser composta por um servidor e um cliente, implementados u
 
 > Nunca fiz isso. Se tomar muito tempo, vou acabar deixando para outra hora.
 
-- [ ] Permitir que o usuário passe um arquivo `.sh` para o servidor para execução;
+- [x] Permitir que o usuário passe um arquivo `.sh` para o servidor para execução;
 
 > Esse com certeza é muito mais fácil do que parece. O motivo principal para fazer isso é dar sentido ao uso do click, já que posso criar uma flag para passar o `PATH` do script.
 
@@ -32,8 +32,8 @@ A aplicação deverá ser composta por um servidor e um cliente, implementados u
 
 - [x] Utilize a biblioteca subprocess para executar comandos bash no servidor;
 - [x] Utilize a biblioteca grpc para implementar a comunicação entre o cliente e o servidor;
-- [ ] Utilize a biblioteca click para implementar a interface de linha de comando do cliente;
-- [ ] Organize o código em pacotes e módulos para facilitar a manutenção e reutilização.
+- [x] Utilize a biblioteca click para implementar a interface de linha de comando do cliente;
+- [x] Organize o código em pacotes e módulos para facilitar a manutenção e reutilização.
 
 > Essa tem sido a parte mais difícil, por se tratar de um código tão pequeno. Mas acredito que conforme for adicionando novas coisas, isso será necessário para manter o [SRP](https://en.wikipedia.org/wiki/Single-responsibility_principle).
 
