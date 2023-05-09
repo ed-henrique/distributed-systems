@@ -1,8 +1,10 @@
-FROM python:3
+FROM python:3-slim
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-RUN apt-get install -y openssl
+RUN apt-get install -y openssl && \
+    mkdir -p /app/certs && \
+    openssl req -newkey rsa:2048 -nodes -keyout /app/certs/server.key -x509 -days 365 -out /app/certs/server.crt -subj "/CN=server"
 
 COPY server/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
@@ -10,9 +12,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY server/server.py ./server.py
 COPY proto/my_service_pb2.py ./my_service_pb2.py
 COPY proto/my_service_pb2_grpc.py ./my_service_pb2_grpc.py
-COPY keys/server.key ./server.key
-COPY keys/server.crt ./server.crt
 
 EXPOSE 50051
 
-CMD [ "python", "/usr/src/app/server.py" ]
+VOLUME /app/certs
+
+CMD [ "python", "/app/server.py" ]

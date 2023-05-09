@@ -16,4 +16,7 @@ else
   echo "No images using the tag ${image_tag} were found."
 fi
 
-echo "Images and containers removed!"
+docker volume prune -f > /dev/null
+docker network prune -f > /dev/null
+
+echo "Images, containers, and volumes were removed!"

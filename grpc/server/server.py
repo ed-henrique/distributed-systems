@@ -19,9 +19,9 @@ class CommandService(my_service_pb2_grpc.CommandServiceServicer):
         return my_service_pb2.CommandResponse(output=result)
 
 def serve():
-    with open('server.key', 'rb') as f:
+    with open('certs/server.key', 'rb') as f:
         private_key = f.read()
-    with open('server.crt', 'rb') as f:
+    with open('certs/server.crt', 'rb') as f:
         certificate_chain = f.read()
     
     credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])

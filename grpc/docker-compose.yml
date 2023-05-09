@@ -1,0 +1,30 @@
+services:
+  server:
+    image: server:eduardo_machado
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    ports:
+      - "50051:50051"
+    environment:
+      - SERVER_ADDRESS=0.0.0.0:50051
+    volumes:
+      - certs:/app/certs
+    networks:
+      - my_network
+
+  client:
+    image: client:eduardo_machado
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    environment:
+      - SERVER_ADDRESS=server:50051
+    volumes:
+      - certs:/app/certs
+    networks:
+      - my_network
+volumes:
+  certs:
+networks:
+  my_network:

@@ -6,7 +6,9 @@ import my_service_pb2_grpc
 @click.command()
 @click.option('-c', '--command', 'command', help='Command to execute.')
 @click.option('-s', '--script', 'script_path', default=None, help='Path to script file.', show_default=True)
-def run(command, script_path):
+@click.option('-u', '--username', 'username', default='username', help='Username for authentication.', show_default=True)
+@click.option('-p', '--password', 'password', default='password', help='Password for authentication.', show_default=True)
+def run(command, script_path, username, password):
     """A client program to execute commands remotely on a Linux server. Use --script to pass a script file to run, or simply pass your command between double quotes.\n
     Examples:\n
         client.py "COMMAND"\n
@@ -15,16 +17,16 @@ def run(command, script_path):
           Pass script as a command to execute on the server.
     """
 
-    with open('server.crt', 'rb') as f:
+    with open('certs/server.crt', 'rb') as f:
         certificate_chain = f.read()
 
     credentials = grpc.ssl_channel_credentials(
         root_certificates=certificate_chain
     )
 
-    with grpc.secure_channel("Eduardo Machado:50051", credentials) as channel:
+    with grpc.secure_channel("server:50051", credentials) as channel:
         stub = my_service_pb2_grpc.AuthenticationServiceStub(channel)
-        request = my_service_pb2.AuthenticationRequest(username='username', password='password')
+        request = my_service_pb2.AuthenticationRequest(username=username, password=password)
         response = stub.Authenticate(request)
         
         if (response.success):
