@@ -11,6 +11,7 @@
 - [Como rodar o código](#como-rodar-o-código)
   - [Dependências](#dependências)
   - [Comandos](#comandos)
+    - [Como usar o cliente](#como-usar-o-cliente)
     - [Explicação do que está acontecendo por baixo dos panos](#explicação-do-que-está-acontecendo-por-baixo-dos-panos)
 
 
@@ -38,7 +39,7 @@ A aplicação deverá ser composta por um servidor e um cliente, implementados u
 
 > Nunca fiz isso. Se tomar muito tempo, vou acabar deixando para outra hora.
 
-- [x] Permitir que o usuário passe um arquivo `.sh` para o servidor para execução;
+- [x] Permitir que o usuário passe um arquivo `.sh` para o servidor para execução.
 
 > Esse com certeza é muito mais fácil do que parece. O motivo principal para fazer isso é dar sentido ao uso do click, já que posso criar uma flag para passar o `PATH` do script.
 
@@ -106,17 +107,25 @@ docker run --rm -it --network=my_network -v certs:/app/certs client:eduardo_mach
 ./uninstall.sh
 ```
 
+#### Como usar o cliente
+
+O cliente usa o `click` para seu CLI e também contém um `alias` para facilitar a execução do código. Para ter acesso aos comandos, use `client --help`. Mas já adianto os principais comandos aqui:
+
+- `client -c "COMANDO"`: executa o COMANDO passado;
+- `client -u "USUÁRIO" -p "SENHA"`: permite trocar o usuário e a senha. Os padrões são é o que está autenticado no servidor, e mudar eles apenas serve para mostrar que a autenticação funciona;
+- `client -s "CAMINHO_PARA_O_SCRIPT"`: passa um script para ser executado no servidor.
+
 #### Explicação do que está acontecendo por baixo dos panos
 
 1. No `install.sh`, o único comando relevante é o `docker compose build`, que realiza o build das imagens.
 2. No servidor e cliente, temos as seguintes opções:
-  - `--rm`: remove o container após sua execução
-  - `-it`: integra o container ao terminal, para que este fique interativo
-  - `--network`: passa a network à qual o container deve se conectar
-  - `-p`: torna uma porta do container disponível para o host
-  - `-v`: passa o volume que o container vai usar
+  - `--rm`: remove o container após sua execução;
+  - `-it`: integra o container ao terminal, para que este fique interativo;
+  - `--network`: passa a network à qual o container deve se conectar;
+  - `-p`: torna uma porta do container disponível para o host;
+  - `-v`: passa o volume que o container vai usar;
 3. No `uninstall.sh`, os comandos relevantes são:
-  - `docker rm -f`: foi configurado de uma forma que apenas vai remover os containers que usarem a tag `eduardo_machado`
-  - `docker image rm`: foi configurado de uma forma que apenas vai remover as imagens que usarem a tag `eduardo_machado`
-  - `docker volume prune -f`: remove todos os volumes não utilizados
-  - `docker network prune -f`: remove todas as networks não utilizadas
+  - `docker rm -f`: foi configurado de uma forma que apenas vai remover os containers que usarem a tag `eduardo_machado`;
+  - `docker image rm`: foi configurado de uma forma que apenas vai remover as imagens que usarem a tag `eduardo_machado`;
+  - `docker volume prune -f`: remove todos os volumes não utilizados;
+  - `docker network prune -f`: remove todas as networks não utilizadas.
