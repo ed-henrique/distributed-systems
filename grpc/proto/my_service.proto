@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package my_service;
+
+service AuthenticationService {
+  rpc Authenticate (AuthenticationRequest) returns (AuthenticationResponse) {}
+}
+
+message AuthenticationRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message AuthenticationResponse {
+  bool success = 1;
+}
+
+service CommandService {
+  rpc RunCommand (CommandRequest) returns (CommandResponse) {}
+}
+
+message CommandRequest {
+  string command = 1;
+}
+
+message CommandResponse {
+  string output = 1;
+}

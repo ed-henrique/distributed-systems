@@ -1,7 +1,7 @@
 import grpc
 import click
-import command_service_pb2
-import command_service_pb2_grpc
+import my_service_pb2
+import my_service_pb2_grpc
 
 @click.command()
 @click.option('-c', '--command', 'command', help='Command to execute.')
@@ -15,16 +15,30 @@ def run(command, script_path):
           Pass script as a command to execute on the server.
     """
 
-    with grpc.insecure_channel("localhost:50051") as channel:
-        if (script_path):
-            with open(script_path, "r") as file:
-                request = file.read()
+    with open('server.crt', 'rb') as f:
+        certificate_chain = f.read()
+
+    credentials = grpc.ssl_channel_credentials(
+        root_certificates=certificate_chain
+    )
+
+    with grpc.secure_channel("Eduardo Machado:50051", credentials) as channel:
+        stub = my_service_pb2_grpc.AuthenticationServiceStub(channel)
+        request = my_service_pb2.AuthenticationRequest(username='username', password='password')
+        response = stub.Authenticate(request)
+        
+        if (response.success):
+            if (script_path):
+                with open(script_path, "r") as file:
+                    request = file.read()
+            else:
+                request = command
+                
+            stub = my_service_pb2_grpc.CommandServiceStub(channel)
+            response = stub.RunCommand(my_service_pb2.CommandRequest(command=request))
+            click.echo(response.output)
         else:
-            request = command
-            
-        stub = command_service_pb2_grpc.CommandServiceStub(channel)
-        response = stub.RunCommand(command_service_pb2.CommandRequest(command=request))
-        click.echo(response.output)
+            click.echo("You are not authenticated!")
 
 if __name__ == "__main__":
     run()

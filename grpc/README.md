@@ -1,4 +1,17 @@
-# Atividade: Criando uma aplicação de controle remoto com gRPC
+# Atividade: Criando uma aplicação de controle remoto com gRPC <!-- omit in toc -->
+
+## Índice <!-- omit in toc -->
+- [Objetivo](#objetivo)
+- [Descrição](#descrição)
+- [Requisitos](#requisitos)
+  - [Essencias (solicitados pelo professor)](#essencias-solicitados-pelo-professor)
+  - [Opcionais (eu quero implementar)](#opcionais-eu-quero-implementar)
+- [Dicas](#dicas)
+- [Bônus](#bônus)
+- [Como rodar o código](#como-rodar-o-código)
+  - [Dependências](#dependências)
+  - [Comandos](#comandos)
+
 
 ## Objetivo
 
@@ -20,7 +33,7 @@ A aplicação deverá ser composta por um servidor e um cliente, implementados u
 
 ### Opcionais (eu quero implementar)
 
-- [ ] Criar containers diferentes para cliente e servidor;
+- [x] Criar containers diferentes para cliente e servidor;
 
 > Nunca fiz isso. Se tomar muito tempo, vou acabar deixando para outra hora.
 
@@ -56,3 +69,28 @@ Implemente alguma funcionalidade adicional na aplicação, como por exemplo:
 - [ ] Utilização de criptografia para garantir a segurança na comunicação entre o cliente e o servidor.
 
 > Pelo que entendi, ao incluir a autenticação no gRPC, os dados serão encriptogrados, então vou focar na autenticação.
+
+## Como rodar o código
+
+### Dependências
+
+- `git`
+- `docker`
+
+### Comandos
+
+```bash
+git clone git@github.com:ed-henrique/distributed-systems.git
+cd grpc
+
+# Dê permissão de execução para os scripts utilizados
+chmod u+x install.sh uninstall.sh
+
+# Instala as imagens e cuida de sincronizar as chaves utilizadas entre elas
+./install.sh
+
+### [WIP] Execução do código usando containers em Docker
+
+# Quando terminar, use esse código para remover containers e imagens utilizados
+./uninstall.sh
+```
